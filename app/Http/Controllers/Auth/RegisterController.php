@@ -28,7 +28,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        // Logika dinamis untuk redirect berdasarkan role
+        if (auth()->user()->role == 'admin') {
+            return '/admin';
+        } elseif (auth()->user()->role == 'client') {
+            return '/';
+        }
+        
+    }
 
     /**
      * Create a new controller instance.
@@ -67,6 +76,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'] ?? 'client',
         ]);
     }
+
 }
