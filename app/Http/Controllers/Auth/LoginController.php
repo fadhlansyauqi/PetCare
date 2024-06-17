@@ -29,7 +29,7 @@ class LoginController extends Controller
     {
         // Logika dinamis untuk redirect berdasarkan role
         if (auth()->user()->role == 'admin') {
-            return '/home';
+            return '/admin';
         } elseif (auth()->user()->role == 'client') {
             return '/';
         }
